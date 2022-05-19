@@ -1,6 +1,5 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
-
 import { HeaderContainer, Nav } from "@components/Header/styles";
 
 const Header: FC = () => {
@@ -9,13 +8,13 @@ const Header: FC = () => {
       <Nav>
         <ul>
           <li>
-            <NavLink to="/words" className={navData => (navData.isActive ? "selected" : "")}>
-              All Words
+            <NavLink to="/quotes" className={navData => (navData.isActive ? "selected" : "")}>
+              All Quotes
             </NavLink>
           </li>
           <li>
-            <NavLink to="/new-word" className={navData => (navData.isActive ? "selected" : "")}>
-              Add a Word
+            <NavLink to="/new-quote" className={navData => (navData.isActive ? "selected" : "")}>
+              Add a Quote
             </NavLink>
           </li>
         </ul>

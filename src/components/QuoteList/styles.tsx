@@ -4,6 +4,13 @@ export const List = styled.ul`
   padding: 0;
 `;
 
+export const ButtonConatiner = styled.div`
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 3px solid #777c91;
+  margin-bottom: 2rem;
+`;
+
 export const SortButton = styled.button`
   font: inherit;
   color: #272c52;

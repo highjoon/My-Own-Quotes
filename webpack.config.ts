@@ -56,7 +56,6 @@ const config: Configuration = {
     static: { directory: path.resolve(__dirname) },
   },
   plugins: [
-    new CleanWebpackPlugin(),
     new ForkTsCheckerWebpackPlugin({ async: false }),
     new webpack.EnvironmentPlugin({
       NODE_ENV: prodMode ? "production" : "development",
@@ -72,10 +71,11 @@ const config: Configuration = {
 
 if (devMode && config.plugins) {
   config.plugins.push(new webpack.HotModuleReplacementPlugin());
-  new ReactRefreshWebpackPlugin({ overlay: { useURLPolyfill: true } });
+  config.plugins.push(new ReactRefreshWebpackPlugin({ overlay: { useURLPolyfill: true } }));
 }
 
 if (prodMode && config.plugins) {
+  config.plugins.push(new CleanWebpackPlugin());
   config.plugins.push(new webpack.LoaderOptionsPlugin({ minimize: true }));
 }
 

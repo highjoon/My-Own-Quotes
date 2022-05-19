@@ -6,9 +6,9 @@ export const Item = styled.li`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 7px 5px rgba(0, 0, 0, 0.2);
   border-radius: 6px;
-  background-color: #777c91;
+  background-color: #6a77af;
 
   & figure {
     margin: 0;
@@ -20,7 +20,7 @@ export const Item = styled.li`
     margin: 0;
     text-align: left;
     font-size: 1.5rem;
-    color: #fff;
+    color: #ffffff;
   }
 
   & p {
@@ -30,7 +30,7 @@ export const Item = styled.li`
 
   & figcaption {
     font-style: italic;
-    color: #fff;
+    color: #ffffff;
   }
 
   &:last-of-type {
@@ -39,16 +39,16 @@ export const Item = styled.li`
 
   & .btn {
     text-decoration: none;
-    background-color: #4c59cc;
+    background-color: #3642aa;
     color: white;
     border-radius: 4px;
     padding: 0.75rem 1.5rem;
-    border: 1px solid #4c59cc;
+    border: 1px solid #3642aa;
     cursor: pointer;
 
     &:hover {
-      background-color: #6671d3;
-      border: 1px solid #6671d3;
+      background-color: #4550b1;
+      border: 1px solid #4550b1;
     }
   }
 `;
