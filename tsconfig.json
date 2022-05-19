@@ -17,6 +17,7 @@
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"],
+      "@assets/*": ["./src/assets/*"],
       "@hooks/*": ["./src/hooks/*"],
       "@components/*": ["./src/components/*"],
       "@layouts/*": ["./src/layouts/*"],
@@ -25,5 +26,6 @@
     }
   },
   "exclude": ["./node_modules"],
-  "include": ["**/*.ts", "**/*.tsx", "webpack.config.ts"]
+  "include": ["**/*.ts", "**/*.tsx", "webpack.config.ts"],
+  "typeRoots": ["src/types"]
 }

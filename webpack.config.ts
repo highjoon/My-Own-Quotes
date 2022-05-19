@@ -27,6 +27,16 @@ const config: Configuration = {
   module: {
     rules: [
       {
+        test: /\.(png|jpg|jpeg)$/,
+        loader: "url-loader",
+        options: {
+          limit: 10000,
+          fallback: "file-loader",
+          name: "[name].[ext]?[hash]",
+          pudlicPath: "./dist/",
+        },
+      },
+      {
         test: /\.(ts|tsx)?$/,
         use: [
           {
@@ -62,7 +72,11 @@ const config: Configuration = {
       NODE_ENV: prodMode ? "production" : "development",
     }),
     new webpack.ProvidePlugin({ React: "react" }),
-    new HtmlWebpackPlugin({ template: "./src/index.html" }),
+    new HtmlWebpackPlugin({
+      template: "./src/index.html",
+      minify: prodMode ? { collapseWhitespace: true, removeComments: true } : false,
+      hash: true,
+    }),
   ],
 };
 

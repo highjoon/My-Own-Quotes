@@ -1,12 +1,7 @@
-import React from "react";
-import Header from "@components/Header";
+import React, { FC, Fragment } from "react";
 
-const Main: React.FC = () => {
-  return (
-    <>
-      <Header></Header>
-    </>
-  );
+const Main: FC = () => {
+  return <Fragment></Fragment>;
 };
 
 export default Main;
