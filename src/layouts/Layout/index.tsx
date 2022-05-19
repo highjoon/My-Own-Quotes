@@ -1,4 +1,4 @@
-import React, { FC, ReactNode } from "react";
+import React, { FC, Fragment, ReactNode } from "react";
 import { LayoutWrapper } from "@layouts/Layout/styles";
 import Header from "@components/Header";
 
@@ -8,10 +8,10 @@ interface Props {
 
 const Layout: FC<Props> = ({ children }) => {
   return (
-    <LayoutWrapper>
+    <Fragment>
       <Header />
-      {children}
-    </LayoutWrapper>
+      <LayoutWrapper>{children}</LayoutWrapper>
+    </Fragment>
   );
 };
 

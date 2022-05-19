@@ -1,15 +1,25 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
-import { HeaderContainer, TitleImage } from "@components/Header/styles";
-import titleImage from "@assets/images/titleImage.png";
+import { HeaderContainer, Nav } from "@components/Header/styles";
 
 const Header: FC = () => {
   return (
     <HeaderContainer>
-      <Link to="/">
-        <TitleImage src={titleImage} alt="title_image" />
-      </Link>
+      <Nav>
+        <ul>
+          <li>
+            <NavLink to="/words" className={navData => (navData.isActive ? "selected" : "")}>
+              All Words
+            </NavLink>
+          </li>
+          <li>
+            <NavLink to="/new-word" className={navData => (navData.isActive ? "selected" : "")}>
+              Add a Word
+            </NavLink>
+          </li>
+        </ul>
+      </Nav>
     </HeaderContainer>
   );
 };

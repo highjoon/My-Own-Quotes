@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const LayoutWrapper = styled.div`
-  width: 100%;
+export const LayoutWrapper = styled.main`
   margin: 0 auto;
-  max-width: 100%;
+  width: 90%;
+  max-width: 40rem;
 `;

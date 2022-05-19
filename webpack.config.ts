@@ -27,16 +27,6 @@ const config: Configuration = {
   module: {
     rules: [
       {
-        test: /\.(png|jpg|jpeg)$/,
-        loader: "url-loader",
-        options: {
-          limit: 10000,
-          fallback: "file-loader",
-          name: "[name].[ext]?[hash]",
-          pudlicPath: "./dist/",
-        },
-      },
-      {
         test: /\.(ts|tsx)?$/,
         use: [
           {
@@ -61,7 +51,7 @@ const config: Configuration = {
   },
   devServer: {
     historyApiFallback: true,
-    port: 3000,
+    port: 3050,
     hot: true,
     static: { directory: path.resolve(__dirname) },
   },
