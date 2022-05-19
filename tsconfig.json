@@ -7,15 +7,23 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "esModuleInterop": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "isolatedModules": true,
     "jsx": "react",
     "allowSyntheticDefaultImports": true,
     "outDir": "./dist",
     "moduleResolution": "Node",
     "resolveJsonModule": true,
-    "baseUrl": "./"
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@hooks/*": ["./src/hooks/*"],
+      "@components/*": ["./src/components/*"],
+      "@layouts/*": ["./src/layouts/*"],
+      "@pages/*": ["./src/pages/*"],
+      "@utils/*": ["./src/utils/*"]
+    }
   },
-  "exclude": ["/node_modules"],
+  "exclude": ["./node_modules"],
   "include": ["**/*.ts", "**/*.tsx", "webpack.config.ts"]
 }
