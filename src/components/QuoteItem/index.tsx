@@ -1,7 +1,7 @@
 import React, { FC } from "react";
-import { Link } from "react-router-dom";
-import { Item } from "@/components/QuoteItem/styles";
-import { IQuote } from "@/types/db";
+import { Link, Outlet } from "react-router-dom";
+import { Item } from "@components/QuoteItem/styles";
+import { IQuote } from "../../types/db";
 
 const QuoteItem: FC<IQuote> = ({ id, author, text }) => {
   return (
@@ -12,9 +12,10 @@ const QuoteItem: FC<IQuote> = ({ id, author, text }) => {
         </blockquote>
         <figcaption>{text}</figcaption>
       </figure>
-      <Link className="btn" to={`/quotes/${id}`}>
+      <Link className="btn" to={`/quote/${id}`}>
         View Detail
       </Link>
+      <Outlet />
     </Item>
   );
 };

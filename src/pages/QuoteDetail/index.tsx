@@ -4,8 +4,8 @@ import HighlightedQuote from "@components/HighlightedQuote";
 import DUMMY_QUOTES from "@api/mockAPI";
 
 const QuoteDetail: FC = () => {
-  const { quoteId } = useParams<{ quoteId?: string }>();
-  const quoteData = DUMMY_QUOTES.filter(quote => quote.id.toString() === quoteId)[0];
+  const { id } = useParams<{ id?: string }>();
+  const quoteData = DUMMY_QUOTES.filter(quote => quote.id.toString() === id)[0];
 
   if (!quoteData.text) {
     return <p>No Quote Found!</p>;

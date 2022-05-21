@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { Quote } from "@components/HighlightedQuote/styles";
-import { IHighlightedQuote } from "@/types/db";
+import { IHighlightedQuote } from "../../types/db";
 
 const HighlightedQuote: FC<IHighlightedQuote> = ({ text, author }) => {
   return (

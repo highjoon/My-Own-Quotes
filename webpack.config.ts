@@ -57,9 +57,7 @@ const config: Configuration = {
   },
   plugins: [
     new ForkTsCheckerWebpackPlugin({ async: false }),
-    new webpack.EnvironmentPlugin({
-      NODE_ENV: prodMode ? "production" : "development",
-    }),
+    new webpack.EnvironmentPlugin({ NODE_ENV: prodMode ? "production" : "development" }),
     new webpack.ProvidePlugin({ React: "react" }),
     new HtmlWebpackPlugin({
       template: "./src/index.html",
