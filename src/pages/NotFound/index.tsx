@@ -1,7 +1,7 @@
-import React, { FC } from "react";
+import React from "react";
 import { NotFoundWrapper } from "@pages/NotFound/styles";
 
-const NotFound: FC = () => {
+const NotFound: React.FC = () => {
   return <NotFoundWrapper>Page Not Found!</NotFoundWrapper>;
 };
 

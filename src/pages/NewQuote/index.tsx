@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import QuoteForm from "@components/QuoteForm";
 
-const NewQuote: FC = () => {
+const NewQuote: React.FC = () => {
   return (
     <Fragment>
       <QuoteForm />

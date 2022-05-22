@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 import { NavLink } from "react-router-dom";
 import { HeaderContainer, Nav } from "@components/Header/styles";
 
-const Header: FC = () => {
+const Header: React.FC = () => {
   return (
     <HeaderContainer>
       <Nav>

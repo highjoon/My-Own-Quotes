@@ -1,9 +1,9 @@
-import React, { FC } from "react";
+import React from "react";
 import { Link, Outlet } from "react-router-dom";
 import { Item } from "@components/QuoteItem/styles";
-import { IQuote } from "../../types/db";
+import { IQuote } from "@typings/db";
 
-const QuoteItem: FC<IQuote> = ({ id, author, text }) => {
+const QuoteItem: React.FC<IQuote> = ({ id, author, text }) => {
   return (
     <Item>
       <figure>

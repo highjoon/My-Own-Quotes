@@ -1,4 +1,4 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ButtonConatiner, List, SortButton } from "@components/QuoteList/styles";
 import QuoteItem from "@components/QuoteItem";
@@ -11,7 +11,7 @@ const sortQuotes = (quotes: Array<{ id: string; author: string; text: string }>,
   });
 };
 
-const QuoteList: FC = () => {
+const QuoteList: React.FC = () => {
   const navigate = useNavigate();
   const location = useLocation();
 

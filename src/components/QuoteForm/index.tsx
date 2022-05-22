@@ -1,31 +1,30 @@
-import React, { FC, Fragment, useRef, useCallback } from "react";
+import React, { Fragment, useRef, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { AddBtn, Card, TextBox, Form } from "@components/QuoteForm/styles";
-import DUMMY_QUOTES from "@api/mockAPI";
+import { addQuote } from "@lib/api";
 
-const QuoteForm: FC = () => {
-  const navigate = useNavigate();
+const QuoteForm: React.FC = () => {
   const authorRef = useRef<HTMLInputElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
+  const navigate = useNavigate();
 
-  const submitFormHandler = useCallback((event: React.FormEvent) => {
-    event.preventDefault();
-    const enteredAuthor = authorRef.current?.value;
-    const enteredText = textRef.current?.value;
+  const submitFormHandler = useCallback(
+    (event: React.FormEvent) => {
+      event.preventDefault();
+      const author = authorRef.current?.value;
+      const text = textRef.current?.value;
 
-    if (enteredAuthor?.trim() && enteredText?.trim()) {
-      addQuoteHandler({
-        id: `${DUMMY_QUOTES.length + 1}`,
-        author: enteredAuthor,
-        text: enteredText,
-      });
-      navigate("/");
-    }
-  }, []);
-
-  const addQuoteHandler = (newQuote: { id: string; author: string; text: string }) => {
-    DUMMY_QUOTES.push(newQuote);
-  };
+      if (author?.trim() && text?.trim()) {
+        try {
+          addQuote({ author, text });
+          navigate("/quotes");
+        } catch (error) {
+          console.dir(error);
+        }
+      }
+    },
+    [authorRef, textRef],
+  );
 
   return (
     <Fragment>

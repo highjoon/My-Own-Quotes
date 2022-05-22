@@ -1,7 +1,7 @@
-import React, { FC, Fragment } from "react";
+import React, { Fragment } from "react";
 import QuoteList from "@components/QuoteList";
 
-const AllQuotes: FC = () => {
+const AllQuotes: React.FC = () => {
   return (
     <Fragment>
       <QuoteList />

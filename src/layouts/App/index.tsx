@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 
 import loadable from "@loadable/component";
@@ -9,7 +9,7 @@ const QuoteDetail = loadable(() => import("@pages/QuoteDetail"));
 const NewQuote = loadable(() => import("@pages/NewQuote"));
 const NotFound = loadable(() => import("@pages/NotFound"));
 
-const App: FC = () => {
+const App: React.FC = () => {
   return (
     <Layout>
       <Routes>

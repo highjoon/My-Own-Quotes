@@ -1,8 +1,8 @@
-import React, { FC } from "react";
+import React from "react";
 import { Quote } from "@components/HighlightedQuote/styles";
-import { IHighlightedQuote } from "../../types/db";
+import { IHighlightedQuote } from "@typings/db";
 
-const HighlightedQuote: FC<IHighlightedQuote> = ({ text, author }) => {
+const HighlightedQuote: React.FC<IHighlightedQuote> = ({ text, author }) => {
   return (
     <Quote>
       <p>{text}</p>
