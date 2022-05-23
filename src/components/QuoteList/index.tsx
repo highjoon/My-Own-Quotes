@@ -8,7 +8,7 @@ interface Props {
   quotes: Array<IQuote> | null;
 }
 
-const sortQuotes = (quotes: Array<IQuote> | IQuote | null, isAsc: boolean) => {
+const sortQuotes = (quotes: Array<IQuote> | null, isAsc: boolean) => {
   return quotes?.sort((a, b) => {
     if (isAsc) return a.text > b.text ? 1 : -1;
     else return a.text < b.text ? 1 : -1;
@@ -36,7 +36,7 @@ const QuoteList: React.FC<Props> = ({ quotes }) => {
         <SortButton onClick={sortHandler}>Sort {isAsc ? "Descending" : "Ascending"}</SortButton>
       </ButtonConatiner>
       <List>
-        {sortedQuotes?.map((quote: IQuote) => (
+        {sortedQuotes?.map(quote => (
           <QuoteItem key={quote.id} id={quote.id} author={quote.author} text={quote.text} />
         ))}
       </List>

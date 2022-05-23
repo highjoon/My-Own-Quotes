@@ -1,6 +1,5 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-
 import loadable from "@loadable/component";
 
 const Layout = loadable(() => import("@layouts/Layout"));

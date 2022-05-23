@@ -1,7 +1,7 @@
 import React, { Fragment, useRef, useCallback } from "react";
 import { AddBtn, Card, TextBox, Form } from "@components/QuoteForm/styles";
-import { IQuote } from "@typings/quote";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
+import { IQuote } from "@typings/quote";
 
 interface Props {
   isLoading: boolean;

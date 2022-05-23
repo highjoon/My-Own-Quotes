@@ -1,5 +1,3 @@
-import { IQuote } from "@typings/quote";
-
 export type States =
   | { data: any; error: null | string; status: string }
   | { data: null; error: string; status: string }
