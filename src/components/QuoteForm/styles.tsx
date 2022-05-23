@@ -31,6 +31,7 @@ export const TextBox = styled.div`
     display: block;
     width: 100%;
     font-size: 1.25rem;
+    resize: none;
   }
 
   & input:focus,

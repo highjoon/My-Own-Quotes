@@ -1,7 +1,8 @@
-import React, { Fragment, useRef, useCallback } from "react";
+import React, { Fragment, useCallback } from "react";
 import { AddBtn, Card, TextBox, Form } from "@components/QuoteForm/styles";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
 import { IQuote } from "@typings/quote";
+import useInput from "@hooks/useInput";
 
 interface Props {
   isLoading: boolean;
@@ -9,21 +10,18 @@ interface Props {
 }
 
 const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
-  const authorRef = useRef<HTMLInputElement>(null);
-  const textRef = useRef<HTMLTextAreaElement>(null);
+  const [newAuthor, onChangeNewAuthor] = useInput("");
+  const [newText, onChangeNewText] = useInput("");
 
   const submitFormHandler = useCallback(
     (event: React.FormEvent) => {
       event.preventDefault();
 
-      const author = authorRef.current?.value;
-      const text = textRef.current?.value;
-
-      if (author?.trim() && text?.trim()) {
-        onAddQuote({ author, text });
+      if (newAuthor?.trim() && newText?.trim()) {
+        onAddQuote({ author: newAuthor, text: newText });
       }
     },
-    [authorRef, textRef],
+    [newAuthor, newText],
   );
 
   return (
@@ -33,11 +31,11 @@ const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
           {isLoading && <LoadingSpinner />}
           <TextBox>
             <label htmlFor="author">Author</label>
-            <input type="text" id="author" ref={authorRef} />
+            <input type="text" id="author" value={newAuthor} onChange={onChangeNewAuthor} />
           </TextBox>
           <TextBox>
             <label htmlFor="text">Text</label>
-            <textarea id="text" rows={5} ref={textRef} />
+            <textarea id="text" rows={5} value={newText} onChange={onChangeNewText} />
           </TextBox>
           <AddBtn>
             <button>Add Quote</button>
