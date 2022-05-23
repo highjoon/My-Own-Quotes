@@ -2,7 +2,7 @@ import { useReducer, useCallback } from "react";
 import { States, Actions } from "@typings/http";
 import { IQuote } from "@typings/quote";
 
-function httpReducer(state: States, action: Actions): States {
+const httpReducer = (state: States, action: Actions): States => {
   if (action.type === "SEND") {
     return {
       data: null,
@@ -28,9 +28,9 @@ function httpReducer(state: States, action: Actions): States {
   }
 
   return state;
-}
+};
 
-function useHttp(requestFunction: any, startWithPending = false) {
+const useHttp = (requestFunction: any, startWithPending = false) => {
   const [httpState, dispatch] = useReducer(httpReducer, {
     data: null,
     error: null,
@@ -38,7 +38,7 @@ function useHttp(requestFunction: any, startWithPending = false) {
   });
 
   const sendRequest = useCallback(
-    async (requestData?: IQuote) => {
+    async (requestData?: IQuote | string) => {
       dispatch({ type: "SEND" });
       try {
         const responseData = await requestFunction(requestData);
@@ -56,6 +56,6 @@ function useHttp(requestFunction: any, startWithPending = false) {
     sendRequest,
     ...httpState,
   };
-}
+};
 
 export default useHttp;

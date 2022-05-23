@@ -1,7 +1,8 @@
 import React from "react";
+import { NotFound } from "@components/NoQuotesFound/styles";
 
 const NoQuotesFound: React.FC = () => {
-  return <div>No quotes are found</div>;
+  return <NotFound>No quotes are found</NotFound>;
 };
 
 export default NoQuotesFound;
