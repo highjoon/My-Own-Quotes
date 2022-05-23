@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect } from "react";
 import QuoteList from "@components/QuoteList";
 import NoQuotesFound from "@components/NoQuotesFound";
+import LoadingSpinner from "@components/UI/LoadingSpinner";
+import QuotesFetchError from "@components/QuotesFetchError";
 import { getAllQuotes } from "@lib/api";
 import useHttp from "@hooks/useHttp";
 
@@ -12,11 +14,11 @@ const AllQuotes: React.FC = () => {
   }, [sendRequest]);
 
   if (status === "pending") {
-    return <div>로딩중</div>;
+    return <LoadingSpinner />;
   }
 
   if (error) {
-    return <p>{error}</p>;
+    return <QuotesFetchError />;
   }
 
   if (status === "completed" && (!loadedAllQuotes || loadedAllQuotes.length === 0)) {

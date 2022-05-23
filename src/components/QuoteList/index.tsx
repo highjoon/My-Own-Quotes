@@ -22,6 +22,7 @@ const QuoteList: React.FC<Props> = ({ quotes }) => {
   const queryParams = new URLSearchParams(location.search);
   const isAsc = queryParams.get("sort") === "asc";
   const sortedQuotes = sortQuotes(quotes, isAsc);
+
   const sortHandler = () => {
     navigate({
       pathname: location.pathname,

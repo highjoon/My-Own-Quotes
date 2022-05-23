@@ -1,26 +1,26 @@
 import React, { Fragment, useRef, useCallback } from "react";
-import { useNavigate } from "react-router-dom";
 import { AddBtn, Card, TextBox, Form } from "@components/QuoteForm/styles";
-import { addQuote } from "@lib/api";
+import { IQuote } from "@typings/quote";
+import LoadingSpinner from "@components/UI/LoadingSpinner";
 
-const QuoteForm: React.FC = () => {
+interface Props {
+  isLoading: boolean;
+  onAddQuote: ({ author, text }: IQuote) => void;
+}
+
+const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
   const authorRef = useRef<HTMLInputElement>(null);
   const textRef = useRef<HTMLTextAreaElement>(null);
-  const navigate = useNavigate();
 
   const submitFormHandler = useCallback(
     (event: React.FormEvent) => {
       event.preventDefault();
+
       const author = authorRef.current?.value;
       const text = textRef.current?.value;
 
       if (author?.trim() && text?.trim()) {
-        try {
-          addQuote({ author, text });
-          navigate("/quotes");
-        } catch (error) {
-          console.dir(error);
-        }
+        onAddQuote({ author, text });
       }
     },
     [authorRef, textRef],
@@ -30,6 +30,7 @@ const QuoteForm: React.FC = () => {
     <Fragment>
       <Card>
         <Form onSubmit={submitFormHandler}>
+          {isLoading && <LoadingSpinner />}
           <TextBox>
             <label htmlFor="author">Author</label>
             <input type="text" id="author" ref={authorRef} />
