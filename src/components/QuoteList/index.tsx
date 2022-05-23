@@ -2,22 +2,26 @@ import React, { Fragment } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { ButtonConatiner, List, SortButton } from "@components/QuoteList/styles";
 import QuoteItem from "@components/QuoteItem";
-import DUMMY_QUOTES from "@api/mockAPI";
+import { IQuote } from "@typings/quote";
 
-const sortQuotes = (quotes: Array<{ id: string; author: string; text: string }>, isAsc: boolean) => {
-  return quotes.sort((a, b) => {
-    if (isAsc) return a.id > b.id ? 1 : -1;
-    else return a.id < b.id ? 1 : -1;
+interface Props {
+  quotes: Array<IQuote> | null;
+}
+
+const sortQuotes = (quotes: Array<IQuote> | null, isAsc: boolean) => {
+  return quotes?.sort((a, b) => {
+    if (isAsc) return a.text > b.text ? 1 : -1;
+    else return a.text < b.text ? 1 : -1;
   });
 };
 
-const QuoteList: React.FC = () => {
+const QuoteList: React.FC<Props> = ({ quotes }) => {
   const navigate = useNavigate();
   const location = useLocation();
 
   const queryParams = new URLSearchParams(location.search);
   const isAsc = queryParams.get("sort") === "asc";
-  const sortedQuotes = sortQuotes(DUMMY_QUOTES, isAsc);
+  const sortedQuotes = sortQuotes(quotes, isAsc);
   const sortHandler = () => {
     navigate({
       pathname: location.pathname,
