@@ -1,27 +1,23 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import { useParams } from "react-router-dom";
+import { NoQuoteFound } from "@pages/QuoteDetail/styles";
 import HighlightedQuote from "@components/HighlightedQuote";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
-import { Error } from "@components/QuotesFetchError/styles";
-import { NoQuoteFound } from "@pages/QuoteDetail/styles";
-import useHttp from "@hooks/useHttp";
-import { getSingleQuote } from "@lib/api";
+import QuotesFetchError from "@components/QuotesFetchError";
+import { useGetSingleQuoteQuery } from "@services/quotes";
+import { AxiosError } from "@typings/http";
 
 const QuoteDetail: React.FC = () => {
-  const { id } = useParams<{ id?: string }>();
+  const { id } = useParams<{ id: string }>();
 
-  const { sendRequest, status, data: quoteData, error } = useHttp(getSingleQuote, true);
+  const { data: quoteData, error, isLoading } = useGetSingleQuoteQuery(id!);
 
-  useEffect(() => {
-    sendRequest(id);
-  }, [sendRequest, id]);
-
-  if (status === "pending") {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
   if (error) {
-    return <Error>{error}</Error>;
+    return <QuotesFetchError error={error as AxiosError} />;
   }
 
   if (!quoteData) {

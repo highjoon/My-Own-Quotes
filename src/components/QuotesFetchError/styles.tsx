@@ -8,5 +8,5 @@ export const Error = styled.p`
   align-items: center;
   font-size: 3rem;
   font-weight: bold;
-  color: white;
+  color: #272c52;
 `;

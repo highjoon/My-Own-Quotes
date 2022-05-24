@@ -7,3 +7,5 @@ export type Actions =
   | { type: "SEND" }
   | { type: "SUCCESS"; responseData: any }
   | { type: "ERROR"; errorMessage: string };
+
+export type AxiosError = { status: number; data: string };
