@@ -8,10 +8,14 @@ export const quotesApi = createApi({
   endpoints: builder => ({
     getAllQuotes: builder.query({
       query: () => "quotes.json",
-      transformResponse: (response: Array<IQuote>) => {
+      transformResponse: (response: IQuote): Array<IQuote> => {
         const result = [];
-        for (const key in response) {
-          result.push({ id: key, ...response[key] });
+        for (const [key, value] of Object.entries(response)) {
+          result.push({
+            id: key,
+            author: value.author,
+            text: value.text
+          });
         }
         return result;
       },
