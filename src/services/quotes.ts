@@ -1,42 +1,13 @@
-import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
-import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { createApi } from "@reduxjs/toolkit/query/react";
 import { IQuote } from "@typings/quote";
 import { FIREBASE_DOMAIN } from "@constants/http";
-
-const axiosBaseQuery =
-  (
-    { baseUrl }: { baseUrl: string } = { baseUrl: "" },
-  ): BaseQueryFn<
-    {
-      url: string;
-      method: AxiosRequestConfig["method"];
-      data?: AxiosRequestConfig["data"];
-      params?: AxiosRequestConfig["params"];
-      headers?: AxiosRequestConfig["headers"];
-    },
-    unknown,
-    unknown
-  > =>
-  async ({ url, method, data, params }) => {
-    try {
-      const result = await axios({ url: baseUrl + url, method, data, params });
-      return { data: result.data };
-    } catch (axiosError) {
-      let err = axiosError as AxiosError;
-      return {
-        error: {
-          status: err.response?.status,
-          data: err.response?.data || err.message,
-        },
-      };
-    }
-  };
+import { axiosBaseQuery } from "@libs/api";
 
 export const quotesApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: `${FIREBASE_DOMAIN}` }),
   tagTypes: [],
   endpoints: builder => ({
-    getAllQuotes: builder.query({
+    getAllQuotes: builder.query<Array<IQuote>, number>({
       query: () => ({ url: "quotes.json", method: "get" }),
       transformResponse: (response: IQuote): Array<IQuote> => {
         const result = [];
@@ -50,13 +21,11 @@ export const quotesApi = createApi({
         return result;
       },
     }),
-    getSingleQuote: builder.query({
+    getSingleQuote: builder.query<IQuote, string>({
       query: (id: string) => ({ url: `quotes/${id}.json`, method: "get" }),
-      transformResponse: (response: IQuote): IQuote => {
-        return response;
-      },
+      transformResponse: (response: IQuote): IQuote => response,
     }),
-    addQuote: builder.mutation({
+    addQuote: builder.mutation<IQuote, Partial<IQuote>>({
       query: (newQuote: { author: string; text: string }) => ({
         url: "/quotes.json",
         method: "post",
