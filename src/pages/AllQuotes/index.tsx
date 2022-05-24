@@ -18,7 +18,7 @@ const AllQuotes: React.FC = () => {
     return <QuotesFetchError error={error as AxiosError} />;
   }
 
-  if (!loadedAllQuotes || loadedAllQuotes.length === 0) {
+  if (loadedAllQuotes === undefined || loadedAllQuotes.length === 0) {
     return <NoQuotesFound />;
   }
 

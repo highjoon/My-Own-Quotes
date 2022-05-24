@@ -5,35 +5,47 @@ import { axiosBaseQuery } from "@libs/api";
 
 export const quotesApi = createApi({
   baseQuery: axiosBaseQuery({ baseUrl: `${FIREBASE_DOMAIN}` }),
-  tagTypes: [],
+  tagTypes: ["Quotes"],
   endpoints: builder => ({
-    getAllQuotes: builder.query<Array<IQuote>, number>({
-      query: () => ({ url: "quotes.json", method: "get" }),
+    getAllQuotes: builder.query<Array<IQuote>, IQuote | string>({
+      query: () => ({ url: "quotes.json", method: "GET" }),
       transformResponse: (response: IQuote): Array<IQuote> => {
         const result = [];
-        for (const [key, value] of Object.entries(response)) {
-          result.push({
-            id: key,
-            author: value.author,
-            text: value.text,
-          });
+        if (response) {
+          for (const [key, value] of Object.entries(response)) {
+            result.push({
+              id: key,
+              author: value.author,
+              text: value.text,
+            });
+          }
         }
         return result;
       },
+      providesTags: result =>
+        result
+          ? [...result.map(({ id }) => ({ type: "Quotes", id } as const)), { type: "Quotes", id: "List" }]
+          : [{ type: "Quotes", id: "List" }],
     }),
     getSingleQuote: builder.query<IQuote, string>({
-      query: (id: string) => ({ url: `quotes/${id}.json`, method: "get" }),
+      query: id => ({ url: `quotes/${id}.json`, method: "GET" }),
       transformResponse: (response: IQuote): IQuote => response,
+      providesTags: (result, error, id) => [{ type: "Quotes", id }],
     }),
     addQuote: builder.mutation<IQuote, Partial<IQuote>>({
-      query: (newQuote: { author: string; text: string }) => ({
+      query: newQuote => ({
         url: "/quotes.json",
-        method: "post",
+        method: "POST",
         data: JSON.stringify(newQuote),
         headers: { "Content-Type": "application/json" },
       }),
+      invalidatesTags: [{ type: "Quotes", id: "List" }],
+    }),
+    delteQuote: builder.mutation<{ id: string }, string>({
+      query: id => ({ url: `quotes/${id}.json`, method: "DELETE" }),
+      invalidatesTags: (result, error, id) => [{ type: "Quotes", id }],
     }),
   }),
 });
 
-export const { useGetAllQuotesQuery, useGetSingleQuoteQuery, useAddQuoteMutation } = quotesApi;
+export const { useGetAllQuotesQuery, useGetSingleQuoteQuery, useAddQuoteMutation, useDelteQuoteMutation } = quotesApi;

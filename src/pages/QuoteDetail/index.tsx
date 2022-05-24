@@ -1,22 +1,34 @@
-import React, { Fragment } from "react";
-import { useParams } from "react-router-dom";
-import { NoQuoteFound } from "@pages/QuoteDetail/styles";
+import React, { Fragment, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { DeleteButton, NoQuoteFound } from "@pages/QuoteDetail/styles";
 import HighlightedQuote from "@components/HighlightedQuote";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
 import QuotesFetchError from "@components/QuotesFetchError";
-import { useGetSingleQuoteQuery } from "@services/quotes";
+import { useDelteQuoteMutation, useGetSingleQuoteQuery } from "@services/quotes";
 import { AxiosError } from "@typings/http";
 
 const QuoteDetail: React.FC = () => {
   const { id } = useParams<{ id: string }>();
+  const navigate = useNavigate();
 
-  const { data: quoteData, error, isLoading } = useGetSingleQuoteQuery(id!);
+  const { data: quoteData, error, isLoading: isGettingQuote } = useGetSingleQuoteQuery(id!);
+  const [deleteQuote, { isSuccess, isError, isLoading: isDeletingQuote }] = useDelteQuoteMutation();
 
-  if (isLoading) {
+  useEffect(() => {
+    if (isSuccess) {
+      navigate("/quotes", { replace: true });
+    }
+  }, [isSuccess, navigate]);
+
+  const delelteQuoteHandler = (id: string) => {
+    deleteQuote(id);
+  };
+
+  if (isGettingQuote || isDeletingQuote) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (error || isError) {
     return <QuotesFetchError error={error as AxiosError} />;
   }
 
@@ -24,7 +36,12 @@ const QuoteDetail: React.FC = () => {
     return <NoQuoteFound>No Quote Found!</NoQuoteFound>;
   }
 
-  return <Fragment>{<HighlightedQuote text={quoteData.text} author={quoteData.author} />}</Fragment>;
+  return (
+    <Fragment>
+      <HighlightedQuote text={quoteData.text} author={quoteData.author} />
+      <DeleteButton onClick={() => delelteQuoteHandler(id!)}>Delete</DeleteButton>
+    </Fragment>
+  );
 };
 
 export default QuoteDetail;
