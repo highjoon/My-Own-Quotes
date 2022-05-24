@@ -1,19 +1,14 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment } from "react";
 import QuoteList from "@components/QuoteList";
 import NoQuotesFound from "@components/NoQuotesFound";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
 import QuotesFetchError from "@components/QuotesFetchError";
-import { getAllQuotes } from "@lib/api";
-import useHttp from "@hooks/useHttp";
+import { useGetAllQuotesQuery } from "@services/quotes";
 
 const AllQuotes: React.FC = () => {
-  const { sendRequest, status, data: loadedAllQuotes, error } = useHttp(getAllQuotes, true);
+  const { data: loadedAllQuotes, error: error, isLoading } = useGetAllQuotesQuery("");
 
-  useEffect(() => {
-    sendRequest();
-  }, [sendRequest]);
-
-  if (status === "pending") {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
 
@@ -21,7 +16,7 @@ const AllQuotes: React.FC = () => {
     return <QuotesFetchError />;
   }
 
-  if (status === "completed" && (!loadedAllQuotes || loadedAllQuotes.length === 0)) {
+  if (!loadedAllQuotes || loadedAllQuotes.length === 0) {
     return <NoQuotesFound />;
   }
 

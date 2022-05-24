@@ -9,7 +9,7 @@ interface Props {
 }
 
 const sortQuotes = (quotes: Array<IQuote> | null, isAsc: boolean) => {
-  return quotes?.sort((a, b) => {
+  return quotes?.slice().sort((a, b) => {
     if (isAsc) return a.text > b.text ? 1 : -1;
     else return a.text < b.text ? 1 : -1;
   });

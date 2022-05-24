@@ -16,7 +16,7 @@ export const addQuote = async (quoteData: IQuote) => {
   }
 };
 
-export const getAllQuotes = async () => {
+export const getAllQuotes = async (): Promise<Array<IQuote>> => {
   try {
     const { data } = await axios.get(`${FIREBASE_DOMAIN}/quotes.json`);
     const result = [];
@@ -31,7 +31,7 @@ export const getAllQuotes = async () => {
   }
 };
 
-export const getSingleQuote = async (id: string) => {
+export const getSingleQuote = async (id: string): Promise<string> => {
   try {
     const { data } = await axios.get(`${FIREBASE_DOMAIN}/quotes/${id}.json`);
     const result = { id, ...data };
