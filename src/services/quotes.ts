@@ -1,7 +1,7 @@
-import { IQuote } from "@typings/quote";
-import { FIREBASE_DOMAIN } from "@constants/http";
 import { BaseQueryFn, createApi } from "@reduxjs/toolkit/query/react";
 import axios, { AxiosError, AxiosRequestConfig } from "axios";
+import { IQuote } from "@typings/quote";
+import { FIREBASE_DOMAIN } from "@constants/http";
 
 const axiosBaseQuery =
   (
@@ -12,6 +12,7 @@ const axiosBaseQuery =
       method: AxiosRequestConfig["method"];
       data?: AxiosRequestConfig["data"];
       params?: AxiosRequestConfig["params"];
+      headers?: AxiosRequestConfig["headers"];
     },
     unknown,
     unknown
@@ -55,7 +56,15 @@ export const quotesApi = createApi({
         return response;
       },
     }),
+    addQuote: builder.mutation({
+      query: (newQuote: { author: string; text: string }) => ({
+        url: "/quotes.json",
+        method: "post",
+        data: JSON.stringify(newQuote),
+        headers: { "Content-Type": "application/json" },
+      }),
+    }),
   }),
 });
 
-export const { useGetAllQuotesQuery, useGetSingleQuoteQuery } = quotesApi;
+export const { useGetAllQuotesQuery, useGetSingleQuoteQuery, useAddQuoteMutation } = quotesApi;

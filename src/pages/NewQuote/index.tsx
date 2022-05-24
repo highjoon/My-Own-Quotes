@@ -1,27 +1,33 @@
 import React, { Fragment, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import QuoteForm from "@components/QuoteForm";
-import useHttp from "@hooks/useHttp";
-import { addQuote } from "@lib/api";
+import QuotesFetchError from "@components/QuotesFetchError";
+import { useAddQuoteMutation } from "@services/quotes";
 import { IQuote } from "@typings/quote";
+import { AxiosError } from "@typings/http";
 
 const NewQuote: React.FC = () => {
-  const { sendRequest, status } = useHttp(addQuote);
   const navigate = useNavigate();
 
+  const [addQuote, { error, isLoading, isSuccess, isError }] = useAddQuoteMutation();
+
   useEffect(() => {
-    if (status === "completed") {
-      navigate("/quotes");
+    if (isSuccess) {
+      navigate("/quotes", { replace: true });
     }
-  }, [status, navigate]);
+  }, [isSuccess, navigate]);
 
   const addQuoteHandler = (quoteData: IQuote) => {
-    sendRequest(quoteData);
+    addQuote(quoteData);
   };
+
+  if (isError) {
+    return <QuotesFetchError error={error as AxiosError} />;
+  }
 
   return (
     <Fragment>
-      <QuoteForm isLoading={status === "pending"} onAddQuote={addQuoteHandler} />
+      <QuoteForm isLoading={isLoading} onAddQuote={addQuoteHandler} />
     </Fragment>
   );
 };

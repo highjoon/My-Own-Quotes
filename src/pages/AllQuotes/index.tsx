@@ -5,15 +5,16 @@ import LoadingSpinner from "@components/UI/LoadingSpinner";
 import QuotesFetchError from "@components/QuotesFetchError";
 import { useGetAllQuotesQuery } from "@services/quotes";
 import { AxiosError } from "@typings/http";
+import { fetcher } from "@utils/fetcher";
 
 const AllQuotes: React.FC = () => {
-  const { data: loadedAllQuotes, error, isLoading } = useGetAllQuotesQuery("");
+  const { data: loadedAllQuotes, error, isError, isLoading } = useGetAllQuotesQuery("", fetcher);
 
-  if (isLoading) {
+  if (isLoading && !loadedAllQuotes) {
     return <LoadingSpinner />;
   }
 
-  if (error) {
+  if (isError) {
     return <QuotesFetchError error={error as AxiosError} />;
   }
 

@@ -24,11 +24,14 @@ const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
     [newAuthor, newText],
   );
 
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
   return (
     <Fragment>
       <Card>
         <Form onSubmit={submitFormHandler}>
-          {isLoading && <LoadingSpinner />}
           <TextBox>
             <label htmlFor="author">Author</label>
             <input type="text" id="author" value={newAuthor} onChange={onChangeNewAuthor} />
