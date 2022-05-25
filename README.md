@@ -10,7 +10,7 @@ Quote 추가, 제거, 수정, 정렬
 
 ## **🔗 링크**
 
-[My Own Quotes - Highjoon](https://628e1e451a95cd0457b18240--keen-unicorn-d46fa9.netlify.app/quotes?sort=desc)
+[My Own Quotes - Highjoon](https://keen-unicorn-d46fa9.netlify.app)
 
 ## **🔨 사용 기술 스택**
 
