@@ -1,6 +1,6 @@
-import React, { Fragment, useEffect } from "react";
+import React, { Fragment, useCallback, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import { DeleteButton, NoQuoteFound } from "@pages/QuoteDetail/styles";
+import { Button, NoQuoteFound } from "@pages/QuoteDetail/styles";
 import HighlightedQuote from "@components/HighlightedQuote";
 import LoadingSpinner from "@components/UI/LoadingSpinner";
 import QuotesFetchError from "@components/QuotesFetchError";
@@ -20,9 +20,19 @@ const QuoteDetail: React.FC = () => {
     }
   }, [isSuccess, navigate]);
 
-  const delelteQuoteHandler = (id: string) => {
-    deleteQuote(id);
-  };
+  const delelteQuoteHandler = useCallback(
+    (id: string) => {
+      deleteQuote(id);
+    },
+    [deleteQuote, id],
+  );
+
+  const editButtonHandler = useCallback(() => {
+    navigate(`/quote/update/${id}`, {
+      state: { quoteData },
+      replace: true,
+    });
+  }, [navigate, quoteData, id]);
 
   if (isGettingQuote || isDeletingQuote) {
     return <LoadingSpinner />;
@@ -39,7 +49,8 @@ const QuoteDetail: React.FC = () => {
   return (
     <Fragment>
       <HighlightedQuote text={quoteData.text} author={quoteData.author} />
-      <DeleteButton onClick={() => delelteQuoteHandler(id!)}>Delete</DeleteButton>
+      <Button onClick={() => delelteQuoteHandler(id!)}>Delete</Button>
+      <Button onClick={editButtonHandler}>Edit</Button>
     </Fragment>
   );
 };

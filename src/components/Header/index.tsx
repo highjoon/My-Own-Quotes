@@ -14,7 +14,7 @@ const Header: React.FC = () => {
           </li>
           <li>
             <NavLink to="/new-quote" className={navData => (navData.isActive ? "selected" : "")}>
-              Add a Quote
+              New Quote
             </NavLink>
           </li>
         </ul>

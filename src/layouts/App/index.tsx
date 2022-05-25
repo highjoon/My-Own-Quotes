@@ -6,6 +6,7 @@ const Layout = loadable(() => import("@layouts/Layout"));
 const AllQuotes = loadable(() => import("@pages/AllQuotes"));
 const QuoteDetail = loadable(() => import("@pages/QuoteDetail"));
 const NewQuote = loadable(() => import("@pages/NewQuote"));
+const UpdateQuote = loadable(() => import("@pages/UpdateQuote"));
 const NotFound = loadable(() => import("@pages/NotFound"));
 
 const App: React.FC = () => {
@@ -15,6 +16,7 @@ const App: React.FC = () => {
         <Route path="/" element={<Navigate replace to={"/quotes"} />} />
         <Route path="/quotes" element={<AllQuotes />} />
         <Route path="/quote/:id" element={<QuoteDetail />} />
+        <Route path="/quote/update/:id" element={<UpdateQuote />} />
         <Route path="/new-quote" element={<NewQuote />} />
         <Route path="*" element={<NotFound />} />
       </Routes>

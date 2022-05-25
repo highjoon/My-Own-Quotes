@@ -6,10 +6,12 @@ import useInput from "@hooks/useInput";
 
 interface Props {
   isLoading: boolean;
-  onAddQuote: ({ author, text }: IQuote) => void;
+  onAddQuote?: ({ author, text }: IQuote) => void;
+  onUpdateQuote?: ({ author, text }: IQuote) => void;
+  originalQuote?: IQuote;
 }
 
-const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
+const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote, onUpdateQuote, originalQuote }) => {
   const [newAuthor, onChangeNewAuthor] = useInput("");
   const [newText, onChangeNewText] = useInput("");
 
@@ -18,7 +20,13 @@ const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
       event.preventDefault();
 
       if (newAuthor?.trim() && newText?.trim()) {
-        onAddQuote({ author: newAuthor, text: newText });
+        if (onAddQuote) {
+          onAddQuote({ author: newAuthor, text: newText });
+        }
+
+        if (onUpdateQuote) {
+          onUpdateQuote({ author: newAuthor, text: newText });
+        }
       }
     },
     [newAuthor, newText],
@@ -34,14 +42,27 @@ const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote }) => {
         <Form onSubmit={submitFormHandler}>
           <TextBox>
             <label htmlFor="author">Author</label>
-            <input type="text" id="author" value={newAuthor} onChange={onChangeNewAuthor} />
+            <input
+              type="text"
+              id="author"
+              value={newAuthor}
+              onChange={onChangeNewAuthor}
+              placeholder={originalQuote && originalQuote.author}
+            />
           </TextBox>
           <TextBox>
             <label htmlFor="text">Text</label>
-            <textarea id="text" rows={5} value={newText} onChange={onChangeNewText} />
+            <textarea
+              id="text"
+              rows={5}
+              value={newText}
+              onChange={onChangeNewText}
+              placeholder={originalQuote && originalQuote.text}
+            />
           </TextBox>
           <AddBtn>
-            <button>Add Quote</button>
+            {onAddQuote && <button> Add Quote</button>}
+            {onUpdateQuote && <button> Update Quote</button>}
           </AddBtn>
         </Form>
       </Card>

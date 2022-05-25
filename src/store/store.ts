@@ -1,6 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import type { PreloadedState } from "@reduxjs/toolkit";
-import { quotesApi } from "../services/quotes";
+import { quotesApi } from "@services/quotes";
 
 const rootReducer = combineReducers({
   [quotesApi.reducerPath]: quotesApi.reducer,

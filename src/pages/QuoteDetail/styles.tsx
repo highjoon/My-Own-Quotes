@@ -8,14 +8,14 @@ export const NoQuoteFound = styled.p`
   align-items: center;
 `;
 
-export const DeleteButton = styled.button`
+export const Button = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
   width: 80%;
   max-width: 40rem;
   padding: 1rem;
-  margin: 3rem auto;
+  margin: 1rem auto;
   border: none;
   border-radius: 6px;
   font-style: italic;

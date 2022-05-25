@@ -4,7 +4,7 @@ export const Quote = styled.figure`
   background-color: #05092c;
   color: white;
   border-radius: 6px;
-  padding: 1rem;
+  padding: 2rem;
   margin: 3rem auto;
   width: 90%;
   max-width: 40rem;

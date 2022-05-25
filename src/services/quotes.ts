@@ -45,7 +45,25 @@ export const quotesApi = createApi({
       query: id => ({ url: `quotes/${id}.json`, method: "DELETE" }),
       invalidatesTags: (result, error, id) => [{ type: "Quotes", id }],
     }),
+    updateQuote: builder.mutation<IQuote, Partial<IQuote>>({
+      query: data => {
+        const { id, ...body } = data;
+        return {
+          url: `quotes/${id}.json`,
+          method: "PUT",
+          data: JSON.stringify(body),
+          headers: { "Content-Type": "application/json" },
+        };
+      },
+      invalidatesTags: (result, error, { id }) => [{ type: "Quotes", id }],
+    }),
   }),
 });
 
-export const { useGetAllQuotesQuery, useGetSingleQuoteQuery, useAddQuoteMutation, useDelteQuoteMutation } = quotesApi;
+export const {
+  useGetAllQuotesQuery,
+  useGetSingleQuoteQuery,
+  useAddQuoteMutation,
+  useDelteQuoteMutation,
+  useUpdateQuoteMutation,
+} = quotesApi;
