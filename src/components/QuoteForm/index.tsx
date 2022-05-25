@@ -29,7 +29,7 @@ const QuoteForm: React.FC<Props> = ({ isLoading, onAddQuote, onUpdateQuote, orig
         }
       }
     },
-    [newAuthor, newText],
+    [newAuthor, newText, onAddQuote, onUpdateQuote],
   );
 
   if (isLoading) {

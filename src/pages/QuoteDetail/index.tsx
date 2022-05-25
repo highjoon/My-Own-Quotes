@@ -24,7 +24,7 @@ const QuoteDetail: React.FC = () => {
     (id: string) => {
       deleteQuote(id);
     },
-    [deleteQuote, id],
+    [deleteQuote],
   );
 
   const editButtonHandler = useCallback(() => {
