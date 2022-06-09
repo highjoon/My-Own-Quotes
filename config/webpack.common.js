@@ -2,7 +2,6 @@
 const path = require("path");
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const dotenv = require("dotenv");
 
 dotenv.config();
@@ -44,7 +43,6 @@ module.exports = {
     new HtmlWebpackPlugin({ template: `${path.resolve(__dirname, "../src/public")}/index.html` }),
     new webpack.ProvidePlugin({ React: "react" }),
     new webpack.DefinePlugin({ "process.env": JSON.stringify(process.env) }),
-    new BundleAnalyzerPlugin(),
   ],
   resolve: {
     alias: {

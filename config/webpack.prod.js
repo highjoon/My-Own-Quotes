@@ -8,9 +8,9 @@ module.exports = merge(common, {
   mode: "production",
   devtool: "cheap-module-source-map",
   output: {
-    filename: "[name].[contenthash].js",
-    path: path.resolve(__dirname, "../dist/"),
-    publicPath: "./",
+    filename: "[name].bundle.js",
+    path: path.resolve(__dirname, "../dist"),
+    publicPath: "/",
     clean: true,
   },
   optimization: {

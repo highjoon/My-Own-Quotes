@@ -14,7 +14,7 @@ module.exports = merge(common, {
     liveReload: true,
   },
   output: {
-    filename: "[name].[contenthash].js",
+    filename: "[name].bundle.js",
     publicPath: "/",
   },
   plugins: [],
