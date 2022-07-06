@@ -9,7 +9,7 @@ import { fetcher } from "@utils/fetcher";
 
 const AllQuotes: React.FC = () => {
   const { data: loadedAllQuotes, error, isError, isLoading } = useGetAllQuotesQuery("", fetcher);
-
+  console.log(loadedAllQuotes, isError);
   if (isLoading && !loadedAllQuotes) {
     return <LoadingSpinner />;
   }

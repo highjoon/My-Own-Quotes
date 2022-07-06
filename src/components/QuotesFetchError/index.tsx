@@ -7,7 +7,7 @@ interface Props {
 }
 
 const QuotesFetchError: React.FC<Props> = ({ error }) => {
-  return <Error>{error.data}</Error>;
+  return <Error>{error.data.error}</Error>;
 };
 
 export default QuotesFetchError;
