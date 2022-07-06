@@ -10,7 +10,7 @@ Quote 추가, 제거, 수정, 정렬
 
 ## **🔗 링크**
 
-~~[My Own Quotes - Highjoon](https://my-own-quotes.netlify.app)~~
+[My Own Quotes - Highjoon](https://my-own-dictionary.web.app/quotes)
 
 ## **🔨 사용 기술 스택**
 
